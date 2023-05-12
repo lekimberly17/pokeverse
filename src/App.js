@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     children: [
       { path: ‘/’, element: <Home /> },
       { path: ‘/favorites’, element: <Favorites /> },
-      { path: ‘/:name’, element: <PokemonDetails /> },
+      { path: ‘:name’, element: <PokemonDetails /> },
     ],
   },
 ]);

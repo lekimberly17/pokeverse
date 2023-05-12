@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from ‘react’;
-import { FavoritesContext } from ‘../FavoritesProvider’;
+import { Link } from ‘react-router-dom’;
 import { Card, Container, Row, Col } from ‘react-bootstrap’;
+import { FavoritesContext } from ‘../FavoritesProvider’;
 function PokemonCard({ url, name }) {
   const [pokemon, setPokemon] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useContext(FavoritesContext);
@@ -33,8 +34,10 @@ function PokemonCard({ url, name }) {
       )}
       <Card.Body className=“d-flex flex-column justify-content-between”>
         <div>
-          <Card.Title style={{ textDecoration: ‘none’, fontWeight: ‘bold’, fontSize: ‘24px’, marginTop: ‘10px’, marginBottom: ‘10px’ }}>
-            {name.toLowerCase()}
+          <Card.Title style={{ textDecoration: ‘underline’, color: ‘blue’, fontSize: ‘24px’, marginTop: ‘10px’, marginBottom: ‘10px’ }}>
+            <Link to={`/${name}`} style={{ textDecoration: ‘none’, fontWeight: ‘normal’ }}>
+              {name.toLowerCase()}
+            </Link>
           </Card.Title>
           <Row>
             <Col sm={12}>
