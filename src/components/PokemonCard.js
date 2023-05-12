@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from ‘react’;
-import { FavoritesContext } from ‘../FavoritesProvider’;
 import { Link } from ‘react-router-dom’;
 import { Card, Button, Container, Row, Col } from ‘react-bootstrap’;
+import { FavoritesContext } from ‘../FavoritesProvider’;
 function PokemonCard({ url, name }) {
   const [pokemon, setPokemon] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useContext(FavoritesContext);
@@ -34,8 +34,10 @@ function PokemonCard({ url, name }) {
       )}
       <Card.Body className=“d-flex flex-column justify-content-between”>
         <div>
-          <Card.Title style={{ textDecoration: ‘none’, fontWeight: ‘bold’, fontSize: ‘24px’, marginTop: ‘10px’, marginBottom: ‘10px’ }}>
-            {name.toLowerCase()}
+          <Card.Title style={{ fontSize: ‘24px’, marginTop: ‘10px’, marginBottom: ‘10px’ }}>
+            <Link to={`/${name}`} style={{ textDecoration: ‘underline’, color: ‘blue’ }}>
+              {name.toLowerCase()}
+            </Link>
           </Card.Title>
           <Row>
             <Col sm={12}>
@@ -51,7 +53,7 @@ function PokemonCard({ url, name }) {
           </Row>
         </div>
         {!favorites.includes(name) ? (
-          <button className=“btn btn-success” onClick={handleAddFavorite}>
+          <button className=“btn btn-primary” onClick={handleAddFavorite}>
             Add to Favorites
           </button>
         ) : (
@@ -63,5 +65,4 @@ function PokemonCard({ url, name }) {
     </Card>
   );
 }
-
 export { PokemonCard };
