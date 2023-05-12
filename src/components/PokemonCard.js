@@ -63,4 +63,5 @@ function PokemonCard({ url, name }) {
     </Card>
   );
 }
+
 export { PokemonCard };
