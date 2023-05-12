@@ -1,19 +1,26 @@
 import React from ‘react’;
-import { createBrowserRouter, RouterProvider} from ‘react-router-dom’;
-import { Home } from ‘../src/routes/Home’
-import { PokemonDetails } from ‘../src/routes/PokemonDetails’
-import { Layout } from ‘../src/routes/Layout’
+import { createBrowserRouter, RouterProvider } from ‘react-router-dom’;
+import { Home } from ‘../src/routes/Home’;
+import { PokemonDetails } from ‘../src/routes/PokemonDetails’;
+import { Layout } from ‘../src/routes/Layout’;
+import { FavoritesProvider } from ‘./FavoritesProvider’;
+import { Favorites } from ‘./routes/Favorites’;
 const router = createBrowserRouter([
-  { path: “/”, element: <Layout/>,
+  {
+    path: ‘/’,
+    element: <Layout />,
     children: [
-      { path: “/”, element: <Home/> },
-      { path: “/:name”, element: <PokemonDetails/>}
-    ]
-}
-])
+      { path: ‘/’, element: <Home /> },
+      { path: ‘/favorites’, element: <Favorites /> },
+      { path: ‘/:name’, element: <PokemonDetails /> },
+    ],
+  },
+]);
 function App() {
   return (
-    <RouterProvider router={router} />
+    <FavoritesProvider>
+      <RouterProvider router={router} />
+    </FavoritesProvider>
   );
 }
 export { App };

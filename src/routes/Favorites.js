@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from ‘react’;
 import { FavoritesContext } from ‘../FavoritesProvider’;
-import { Link } from ‘react-router-dom’;
-import { Card, Button, Container, Row, Col } from ‘react-bootstrap’;
+import { Card, Container, Row, Col } from ‘react-bootstrap’;
 function PokemonCard({ url, name }) {
   const [pokemon, setPokemon] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useContext(FavoritesContext);
@@ -28,7 +27,7 @@ function PokemonCard({ url, name }) {
   }
   const { sprites, abilities } = pokemon;
   return (
-    <Card className=“border card-spacing” style={{ width: ‘18rem’, display: ‘flex’, flexDirection: ‘column’ }}>
+    <Card className=“border” style={{ width: ‘18rem’, display: ‘flex’, flexDirection: ‘column’ }}>
       {sprites && (
         <Card.Img variant=“top” src={sprites.front_default} style={{ width: ‘15em’, height: ‘15em’ }} alt={name} />
       )}
@@ -63,4 +62,20 @@ function PokemonCard({ url, name }) {
     </Card>
   );
 }
-export { PokemonCard };
+function Favorites() {
+  const { favorites } = useContext(FavoritesContext);
+  return (
+    <Container>
+      <Row className=“justify-content-center mt-4 favorites-row”>
+        {favorites.map((favorite) => (
+          <Col md={3} className=“my-3” key={favorite}>
+            <div className=“card-spacing”>
+              <PokemonCard url={`https://pokeapi.co/api/v2/pokemon/${favorite}`} name={favorite} />
+            </div>
+          </Col>
+        ))}
+      </Row>
+    </Container>
+  );
+}
+export { Favorites };
